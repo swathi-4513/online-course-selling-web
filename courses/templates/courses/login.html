@@ -1,0 +1,62 @@
+{% extends 'courses/base.html' %}
+{% load course_custom_tags %}
+{%block title%}
+Signup
+{% endblock %}
+
+
+{% block content %}
+<style>
+    .container_fluid{
+        padding-left: 400px;
+        padding-top: 50px;
+        
+    }
+    display-1{
+        text-color: red;
+    }
+    .image{
+        background-image: url(https://wallpapercave.com/wp/wp2939993.jpg);
+        
+    }
+    .btn{
+        font-family: monospace;
+    }
+    .btn:hover{
+        box-shadow: 0 0 5px 5px  black;
+        cursor: pointer;
+        transition: 0.1s;
+    }
+    
+
+</style>
+
+
+<body class="image">
+    <div class="container_fluid" >
+        <h1 class="display-1 ">login</h1>
+        <hr>
+    
+        <div>
+            <form method="POST" action="">
+                {% csrf_token %}
+                {{form.as_p}}
+    
+                <div class="btn">
+                    <input type="submit" value="Login">
+                </div>
+
+            </form>
+        </div>
+        <div class="container_fluid1">
+    
+    
+            
+        </div>
+    </div>
+    
+</body>
+
+
+
+{% endblock %}

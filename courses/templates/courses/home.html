@@ -1,0 +1,324 @@
+{% extends 'courses/base.html' %}
+{% load course_custom_tags %}
+{% block title %}Courses
+        {% endblock %}
+
+
+{% block content %}
+
+<style>
+    .price{
+        font-size: 20px;
+    }
+    .top-banner{
+        width: 40cm;
+        height: 15cm;
+        padding-bottom: 0px;
+    }
+    .heading{
+        align-items: center;
+    }
+    .testimonials{
+        padding: 50px;
+        text-align: center;
+        background-color: rgb(30, 39, 65);
+   
+    }
+    .head{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        
+        color: black ;
+        letter-spacing: 2px;
+        font-size: 50px;
+        font-style: italic;
+        text-decoration: doubled;
+        background-color: rgb(30, 39, 65);
+        
+        
+    }
+    .test-sub-cont{
+        display: flex;
+        flex-direction: row;
+    }
+    .card-test{
+        border: 2px red solid;
+        margin: 20px;
+    }
+    
+    .sc-h1{
+      font-family: 'Montserrat', sans-serif;
+      font-size: 25px;
+      color: white;
+      padding-top: 20px;
+    }
+    .sc-p{
+      font-family: ursive;
+      font-size: 20px;
+      color: white;
+      padding-top: 20px;
+
+    }
+
+    .col-md-4{
+        margin: 40px;
+    }
+    .profile{
+        padding" 70px 10px 10px;
+        
+    }
+
+    
+    .user{
+        height: 250px;
+        width: 205px;
+        border-radius: 50%;
+    }
+    .profile h3{
+        font-sixe: 20px;
+        marding-top: 15px;
+        font-style: bold;
+        color: rgb(27, 13, 95);
+        font-family: 'Times New Roman', Times, serif
+        
+        
+    }
+    .spin{
+        font-size: 12px;
+        color: black;
+    }
+    .blockquote{
+        font-size: 16px;
+        line-height: 30px;
+    }
+    blockquote::before{
+        content: '\91';
+        font-size: 50px;
+        position: relative;
+        color: rgb(64, 45, 161);
+        line-height: 20px;
+        bottom: -15px;
+        right: 5px;
+    }
+    blockquote::after{
+        content: '\93';
+        font-size: 50px;
+        position: relative;
+        color: rgb(64, 45, 161);
+        line-height: 10px;
+        bottom: -15px;
+        left: 5px;
+    }
+    .card-test:hover{
+        box-shadow: 0 0 25px 25px  rgb(134, 16, 41);
+        cursor: pointer;
+        transition: 0.1s;
+    }
+    .card:hover{
+        box-shadow: 0 0 25px 25px  black;
+        cursor: pointer;
+        transition: 0.1s;
+
+    }
+
+    .logo-img{
+        height:80px;
+        width: 80px;
+        align-items: center;
+    }
+    .img{
+        align-content: center;
+    }
+    .logo-img1{
+        height: 60px;
+        width: 60px;
+    }
+
+    .services{
+        padding: 50px;
+        text-align: center;
+    }
+    .ser-h1{
+        font-family:'Times New Roman', Times, serif;
+        color: black;
+        letter-spacing: 2px;
+        font-sixe: 100px;
+        font-style: bold;
+    }
+    .services-sub-cont{
+        display: flex;
+        flex-direction: row;
+
+    }
+    .services-card{
+        border: 2px red solid;
+        margin: 20px;
+        padding: 20px;
+        width: 400px;
+    }
+    .services-card:hover{
+        box-shadow: 0 0 25px 25px  black;
+        cursor: pointer;
+        transition: 0.1s;
+
+    }
+    
+
+    .sc-h1{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 25px;
+        text-color: white;
+    }
+    
+</style>
+
+
+<div>
+    <div style="background-color: rgb(30, 39, 65);">
+        <img class="top-banner" src="https://e-tuitions.com/images/1624873936613-blog%209.jpg">"
+    
+    </div>
+    <h1 class="head" style="text-align: center;" id="courses">Courses</h1>
+    <div class="container_fluid" style="background-color: rgb(30, 39, 65);">
+        <div class="row" style="background-color: rgb(30, 39, 65);" >
+            {% for course in courses %}
+            <div class="col" style="padding-top: 20px; padding-bottom: 20px;">
+                <div class="card mx-auto align-justify" style="width: 18rem;" >
+                    <img src="{{course.thumbnail.url}}" class="card image top" alt="..." style="padding-right: 0px; padding-left: 0px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{course.name}}</h5>
+                        <p class="card-text" m-0 p-0>
+                           Save {{course.discount}}%
+                           <p><del>₹{{course.price}}</del>
+                           &nbsp;
+                            <span class="price">₹399.6</span></p>
+                        </p>
+                    </div>
+                
+                    <div class="card-footer p-0">
+                        {% is_enrolled request course as enrolled %}
+    
+    
+                        <div class="row no-gutters">
+                            {% if enrolled %}
+                            <div class="col border-right">
+                                <a href="/course/{{course.slug}}" class="btn btn-light btn-block">Start Course</a>
+                            </div>
+                            {% else %}
+                            <div class="col border-right">
+                                <a href="/check-out/{{course.slug}}" class="btn btn-light btn-block">Join Now</a>
+                            </div>
+                            <div class="col">
+                                <a href="/course/{{course.slug}}" class="btn btn-light  btn-block">Show More</a>
+                            </div>
+                            {% endif %}
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="testimonials">
+        <h1 class="head" id="testimonials">Testimonials</h1>
+        <div class="test-sub-cont">
+            <div class="card-test">
+                <h1 class="sc-h1">Web Development</h1>
+                <p class="sc-p">Web development involves creating and maintaining websites or web applications using 
+                    technologies such as HTML, CSS, JavaScript, and backend frameworks, enabling users to interact with 
+                    content and services over the internet.
+                </p>         
+            </div>
+            <div class="card-test">
+                <h1 class="sc-h1">Ui/Ux design</h1>
+                <p class="sc-p" >UI (User Interface) design focuses on creating visually appealing and intuitive layouts for digital 
+                    interfaces, while UX (User Experience) designemphasizes enhancing user satisfaction by improving usability, accessibility,
+                    and overall interaction quality.
+                </p>         
+            </div>
+            <div class="card-test">
+                <h1 class="sc-h1" >Devops</h1>
+                <p class="sc-p">DevOps is a software development methodology that integrates software development (Dev) with IT operations (Ops),
+                    aiming to shorten the development life cycle, automate processes, and deliver high-quality software continuously, often through 
+                </p>       
+            </div>
+
+        </div>
+
+    <div>
+
+
+        <div class="row">
+            <h1 class="head" > Our Team</h1> 
+            <div class= "testimonials" "row-md-4 text-center" style="background-color: rgb(196, 172, 143);"> 
+                <div class="profile">
+                    <img src="https://img.freepik.com/free-photo/smiley-businesswoman-posing-outdoors-with-arms-crossed-copy-space_23-2148767055.jpg " class="user">
+                    <blockquote>DevOps is a software development methodology that integrates software development (Dev) with IT operations (Ops),
+                        aiming to shorten the development life cycle, automate processes, and deliver high-quality software continuously, often through 
+                    </blockquote>
+                    <h3> avinash kr <span class="spin">co-founder at xyz</span></h3>
+                </div>
+            </div>
+    
+            <div class=  "testimonials" "col-md-4 text-center" style="background-color: rgb(196, 172, 143);">
+                <div class="profile">
+                    <img src="https://img.freepik.com/free-photo/smiley-businesswoman-posing-outdoors-with-arms-crossed-copy-space_23-2148767055.jpg " class="user">
+                    <blockquote>DevOps is a software development methodology that integrates software development (Dev) with IT operations (Ops),
+                        aiming to shorten the development life cycle, automate processes, and deliver high-quality software continuously, often through 
+                    </blockquote>
+                    <h3> avinash kr <span class="spin">co-founder at xyz</span></h3>
+                </div>
+            </div>
+    
+            <div class=  "testimonials" "col-md-4 text-center" style="background-color: rgb(196, 172, 143);">
+                <div class="profile">
+                    <img src="https://img.freepik.com/free-photo/smiley-businesswoman-posing-outdoors-with-arms-crossed-copy-space_23-2148767055.jpg " class="user">
+                    <blockquote>DevOps is a software development methodology that integrates software development (Dev) with IT operations (Ops),
+                        aiming to shorten the development life cycle, automate processes, and deliver high-quality software continuously, often through 
+                    </blockquote>
+                    <h3> avinash kr <span class="spin">co-founder at xyz</span></h3>
+                </div>
+            </div>
+        </div>
+
+       <div class="services">
+        <h1 class="ser-h1" id="contact us">Contact Us</h1>
+        <div class="services-sub-cont">
+            <div class="services-card">
+                <h1 class="sc-h1">YouTube</h1>
+                <a href="https://www.youtube.com/">
+                    <div class="img">
+                       <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png?20220706172052" class="logo-img">
+                   </a>
+                    </div>
+            </div>
+            <div class="services-card">
+                <h1 class="sc-h1">Facebook</h1>
+                <a href="https://www.youtube.com/">
+                    <div class="img">
+                       <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" class="logo-img">
+                   </a>
+                    </div>
+            </div>
+            <div class="services-card">
+                <h1 class="sc-h1">Instagram</h1>
+                <a href="https://www.instagram.com/">
+                    <div class="img">
+                       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png" class="logo-img">
+                   </a>
+                    </div>
+            </div>
+        </div>
+       </div>
+
+
+
+
+
+</div>
+
+
+
+
+{%endblock%}
